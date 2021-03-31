@@ -32,7 +32,7 @@ function sleep (ms) {
     return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
-app.post('/motion-detected', async (req, res) => {
+app.post('/porch-action', async (req, res) => {
     console.log(req.body)
     if(req.body.auth === process.env.SECRET_KEY){
         res.sendStatus(200)
