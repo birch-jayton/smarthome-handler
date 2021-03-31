@@ -9,7 +9,7 @@ app.use(bodyParser.json())
 
 // CONFIGS
 const sleepTimeMs = 180000
-const delayTimeMs = 3000
+const delayTimeMs = 4000
 
 //event names for ifttt webhooks
 const PORCH_LIGHT_ON_EVENT = "turn_porch_light_on"
@@ -43,6 +43,7 @@ app.post('/porch-action', async (req, res) => {
     if(req.body.auth === process.env.SECRET_KEY){
         res.sendStatus(200)
 
+        await sleep(delayTimeMs)
         PORCH_LIGHT.turnOn()
         await sleep(sleepTimeMs)
         PORCH_LIGHT.turnOff()
@@ -57,7 +58,6 @@ app.post('/living-room-action', async (req, res) => {
     if(req.body.auth === process.env.SECRET_KEY){
         res.sendStatus(200)
 
-        await sleep(delayTimeMs)
         //turn lights on
         LIVING_ROOM_LIGHTS.turnOn()
         await sleep(sleepTimeMs)
